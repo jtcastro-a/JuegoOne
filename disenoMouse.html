@@ -3,38 +3,43 @@
 <script>
   var pantalla = document.querySelector("canvas");
   var pincel = pantalla.getContext("2d");
+  var rect = pantalla.getContext("2d");
 
   pincel.fillStyle = "grey";
   pincel.fillRect(0, 0, 600, 400);
 
   var puedoDibujar = false;
 
-  //Variables para dibujar la paleta
-  var xRojo = 0;
-  var xVerde = 50;
-  var xAzul = 100;
-  var yCuadrados = 0;
-  var tamanhoCuadrados = 50;
-
-  function dibujarCirculo(evento) {
+  function dibujarCuadrado(evento) {
     if (puedoDibujar) {
       var x = evento.pageX - pantalla.offsetLeft;
       var y = evento.pageY - pantalla.offsetTop;
       pincel.fillStyle = "blue";
       pincel.beginPath();
-      pincel.arc(x, y, 5, 0, 2 * 3.14);
+      pincel.fillRect(x, y, 70, 70);
+      pincel.fill();
+    }
+
+    if (puedoDibujar) {
+      var x = evento.pageX - pantalla.offsetLeft;
+      var y = evento.pageY - pantalla.offsetTop;
+      pincel.fillStyle = "red";
+      pincel.beginPath();
+      pincel.fillRect(x, y, 60, 60);
+      pincel.fill();
+    }
+
+    if (puedoDibujar) {
+      var x = evento.pageX - pantalla.offsetLeft;
+      var y = evento.pageY - pantalla.offsetTop;
+      pincel.fillStyle = "green";
+      pincel.beginPath();
+      pincel.fillRect(x, y, 50, 50);
       pincel.fill();
     }
   }
 
-  //Función para dibujar cada uno de los cuadrados de la paleta
-  function dibujarCuadrado(x, y, tamanho, color) {
-    pincel.fillStyle = color;
-    pincel.fillRect(x, y, tamanho, tamanho);
-    pincel.fill();
-  }
-
-  pantalla.onmousemove = dibujarCirculo;
+  pantalla.onmousemove = dibujarCuadrado;
 
   function habilitarDibujar() {
     puedoDibujar = true;
